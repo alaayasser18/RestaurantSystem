@@ -11,7 +11,6 @@ namespace Domain.Entities
 
         public int MenuItemId { get; set; }
 
-        // Menu item snapshot
         [Required]
         [StringLength(150)]
         public string Name { get; set; } = string.Empty;
