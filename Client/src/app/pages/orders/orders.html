@@ -1,0 +1,2011 @@
+<div class="min-h-screen bg-[#f8f7f3] text-slate-900">
+
+    <!-- HEADER -->
+    <header class="border-b border-slate-200 bg-white">
+
+        <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-8">
+
+            <button
+                type="button"
+                (click)="goBackToMenu()"
+                class="group flex items-center gap-3"
+            >
+
+                <span
+                    class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ffb400] text-slate-950 transition-transform duration-200 group-hover:-translate-x-1"
+                >
+
+                    <svg
+                        class="h-5 w-5"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15 18l-6-6 6-6"
+                        />
+                    </svg>
+
+                </span>
+
+                <span class="text-left">
+
+                    <span
+                        class="block text-xs font-bold uppercase tracking-[0.2em] text-slate-400"
+                    >
+                        FoodGo
+                    </span>
+
+                </span>
+
+            </button>
+
+            <div class="hidden items-center gap-2 sm:flex">
+
+                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+
+                <span class="text-xs font-semibold text-slate-500">
+                    Secure order
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================================================= -->
+    <!-- STEP 3 -->
+    <!-- ================================================= -->
+
+    @if (currentStep === 3) {
+
+    <main class="mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
+
+        <!-- HEADER -->
+
+        <div class="mb-8">
+
+            <div class="mb-4 flex items-center gap-3">
+
+                <span
+                    class="flex h-9 w-9 items-center justify-center rounded-full bg-[#ffb400] text-sm font-black text-slate-950"
+                >
+                    03
+                </span>
+
+                <span
+                    class="text-xs font-black uppercase tracking-[0.22em] text-slate-400"
+                >
+                    Customer information
+                </span>
+
+            </div>
+
+            <h1
+                class="max-w-2xl text-4xl font-black tracking-tight text-slate-950 sm:text-5xl"
+            >
+
+                Reserve
+
+                <span
+                    class="font-serif font-medium italic text-[#e58b00]"
+                >
+                    your table
+                </span>
+
+            </h1>
+
+            <p
+                class="mt-4 max-w-2xl text-sm leading-7 text-slate-500"
+            >
+                Tell us where to deliver your order and how
+                we can reach you. Your information is only used
+                to complete this reservation.
+            </p>
+
+        </div>
+
+
+        <!-- PROGRESS -->
+
+        <div class="mb-10">
+
+            <div class="flex items-center gap-3">
+
+                <div class="flex items-center gap-2">
+
+                    <span
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-[#ffb400] text-xs font-black"
+                    >
+                        1
+                    </span>
+
+                    <span
+                        class="hidden text-xs font-bold text-slate-700 sm:block"
+                    >
+                        Restaurant
+                    </span>
+
+                </div>
+
+                <div class="h-px w-8 bg-[#ffb400] sm:w-16"></div>
+
+                <div class="flex items-center gap-2">
+
+                    <span
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-[#ffb400] text-xs font-black"
+                    >
+                        2
+                    </span>
+
+                    <span
+                        class="hidden text-xs font-bold text-slate-700 sm:block"
+                    >
+                        Menu
+                    </span>
+
+                </div>
+
+                <div class="h-px w-8 bg-[#ffb400] sm:w-16"></div>
+
+                <div class="flex items-center gap-2">
+
+                    <span
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-950 text-xs font-black text-white"
+                    >
+                        3
+                    </span>
+
+                    <span
+                        class="hidden text-xs font-bold text-slate-950 sm:block"
+                    >
+                        Your details
+                    </span>
+
+                </div>
+
+                <div class="h-px w-8 bg-slate-200 sm:w-16"></div>
+
+                <div class="flex items-center gap-2">
+
+                    <span
+                        class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-xs font-black text-slate-400"
+                    >
+                        4
+                    </span>
+
+                    <span
+                        class="hidden text-xs font-bold text-slate-400 sm:block"
+                    >
+                        Confirmation
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MAIN GRID -->
+
+        <div class="grid gap-8 lg:grid-cols-[1.25fr_0.75fr]">
+
+            <!-- FORM -->
+
+            <section
+                class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_70px_-35px_rgba(15,23,42,0.25)]"
+            >
+
+                <div
+                    class="border-b border-slate-100 px-6 py-7 sm:px-8"
+                >
+
+                    <div
+                        class="flex items-start justify-between gap-5"
+                    >
+
+                        <div>
+
+                            <p
+                                class="text-[11px] font-black uppercase tracking-[0.22em] text-[#d88a00]"
+                            >
+                                Reservation details
+                            </p>
+
+                            <h2
+                                class="mt-2 text-2xl font-black tracking-tight text-slate-950"
+                            >
+                                Customer Information
+                            </h2>
+
+                            <p class="mt-2 text-sm text-slate-500">
+                                All fields are required.
+                            </p>
+
+                        </div>
+
+                        <div
+                            class="hidden h-12 w-12 items-center justify-center rounded-2xl bg-[#fff5d6] text-[#e39a00] sm:flex"
+                        >
+
+                            <svg
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            >
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M20 21a8 8 0 00-16 0"
+                                />
+
+                                <circle
+                                    cx="12"
+                                    cy="7"
+                                    r="4"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    #customerForm="ngForm"
+                    (ngSubmit)="next(customerForm)"
+                    class="p-6 sm:p-8"
+                >
+
+                    <div class="grid gap-6 sm:grid-cols-2">
+
+                        <!-- NAME -->
+
+                        <div>
+
+                            <label
+                                class="mb-2 block text-xs font-black uppercase tracking-wider text-slate-500"
+                            >
+                                Full name
+                            </label>
+
+                            <div
+                                class="flex overflow-hidden rounded-xl border border-slate-200 bg-white transition-all focus-within:border-[#ffb400] focus-within:ring-4 focus-within:ring-[#ffb400]/10"
+                            >
+
+                                <div
+                                    class="flex w-12 shrink-0 items-center justify-center bg-slate-950 text-[#ffb400]"
+                                >
+
+                                    <svg
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    >
+
+                                        <circle
+                                            cx="12"
+                                            cy="8"
+                                            r="3.5"
+                                        />
+
+                                        <path
+                                            stroke-linecap="round"
+                                            d="M5 20a7 7 0 0114 0"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <input
+                                    type="text"
+                                    name="name"
+                                    [(ngModel)]="customer.name"
+                                    (ngModelChange)="saveCustomerInfo()"
+                                    required
+                                    placeholder="Your full name"
+                                    class="min-w-0 flex-1 border-0 bg-transparent px-4 py-3.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-300"
+                                />
+
+                            </div>
+
+                            @if (
+                                submitted &&
+                                customerForm.controls['name']?.invalid
+                            ) {
+
+                                <p
+                                    class="mt-2 text-xs font-semibold text-red-500"
+                                >
+                                    Please enter your name.
+                                </p>
+
+                            }
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div>
+
+                            <label
+                                class="mb-2 block text-xs font-black uppercase tracking-wider text-slate-500"
+                            >
+                                Phone
+                            </label>
+
+                            <div
+                                class="flex overflow-hidden rounded-xl border border-slate-200 bg-white transition-all focus-within:border-[#ffb400] focus-within:ring-4 focus-within:ring-[#ffb400]/10"
+                            >
+
+                                <div
+                                    class="flex w-12 shrink-0 items-center justify-center bg-slate-950 text-[#ffb400]"
+                                >
+
+                                    <svg
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    >
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M5 4h3l2 5-2 1.5a14 14 0 005.5 5.5L15 14l5 2v3a2 2 0 01-2 2C10.8 21 3 13.2 3 6a2 2 0 012-2z"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    [(ngModel)]="customer.phone"
+                                    (ngModelChange)="saveCustomerInfo()"
+                                    required
+                                    pattern="^(01[0125][0-9]{8})$"
+                                    placeholder="01XXXXXXXXX"
+                                    class="min-w-0 flex-1 border-0 bg-transparent px-4 py-3.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-300"
+                                />
+
+                            </div>
+
+                            @if (
+                                submitted &&
+                                customerForm.controls['phone']?.invalid
+                            ) {
+
+                                <p
+                                    class="mt-2 text-xs font-semibold text-red-500"
+                                >
+                                    Enter a valid Egyptian phone number.
+                                </p>
+
+                            }
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div>
+
+                            <label
+                                class="mb-2 block text-xs font-black uppercase tracking-wider text-slate-500"
+                            >
+                                E-mail
+                            </label>
+
+                            <div
+                                class="flex overflow-hidden rounded-xl border border-slate-200 bg-white transition-all focus-within:border-[#ffb400] focus-within:ring-4 focus-within:ring-[#ffb400]/10"
+                            >
+
+                                <div
+                                    class="flex w-12 shrink-0 items-center justify-center bg-slate-950 text-[#ffb400]"
+                                >
+
+                                    <svg
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    >
+
+                                        <rect
+                                            x="3"
+                                            y="5"
+                                            width="18"
+                                            height="14"
+                                            rx="2"
+                                        />
+
+                                        <path
+                                            stroke-linecap="round"
+                                            d="M4 7l8 6 8-6"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <input
+                                    type="email"
+                                    name="email"
+                                    [(ngModel)]="customer.email"
+                                    (ngModelChange)="saveCustomerInfo()"
+                                    required
+                                    placeholder="you@example.com"
+                                    class="min-w-0 flex-1 border-0 bg-transparent px-4 py-3.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-300"
+                                />
+
+                            </div>
+
+                            @if (
+                                submitted &&
+                                customerForm.controls['email']?.invalid
+                            ) {
+
+                                <p
+                                    class="mt-2 text-xs font-semibold text-red-500"
+                                >
+                                    Enter a valid email address.
+                                </p>
+
+                            }
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+
+                        <div>
+
+                            <label
+                                class="mb-2 block text-xs font-black uppercase tracking-wider text-slate-500"
+                            >
+                                Address
+                            </label>
+
+                            <div
+                                class="flex overflow-hidden rounded-xl border border-slate-200 bg-white transition-all focus-within:border-[#ffb400] focus-within:ring-4 focus-within:ring-[#ffb400]/10"
+                            >
+
+                                <div
+                                    class="flex w-12 shrink-0 items-center justify-center bg-slate-950 text-[#ffb400]"
+                                >
+
+                                    <svg
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="1.8"
+                                    >
+
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"
+                                        />
+
+                                        <circle
+                                            cx="12"
+                                            cy="10"
+                                            r="2.2"
+                                        />
+
+                                    </svg>
+
+                                </div>
+
+                                <input
+                                    type="text"
+                                    name="address"
+                                    [(ngModel)]="customer.address"
+                                    (ngModelChange)="saveCustomerInfo()"
+                                    required
+                                    placeholder="Delivery address"
+                                    class="min-w-0 flex-1 border-0 bg-transparent px-4 py-3.5 text-sm font-medium text-slate-900 outline-none placeholder:text-slate-300"
+                                />
+
+                            </div>
+
+                            @if (
+                                submitted &&
+                                customerForm.controls['address']?.invalid
+                            ) {
+
+                                <p
+                                    class="mt-2 text-xs font-semibold text-red-500"
+                                >
+                                    Please enter your address.
+                                </p>
+
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div
+                        class="mt-10 flex flex-col-reverse gap-3 border-t border-slate-100 pt-6 sm:flex-row sm:items-center sm:justify-between"
+                    >
+
+                        <button
+                            type="button"
+                            (click)="goBackToMenu()"
+                            class="group inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-black text-slate-600 transition-all hover:border-slate-300 hover:bg-slate-50"
+                        >
+
+                            <svg
+                                class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M19 12H5M12 19l-7-7 7-7"
+                                />
+
+                            </svg>
+
+                            BACK TO MENU
+
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="group inline-flex items-center justify-center gap-3 rounded-xl bg-[#ffb400] px-7 py-3.5 text-sm font-black text-slate-950 shadow-lg shadow-[#ffb400]/20 transition-all hover:-translate-y-0.5 hover:bg-[#ffca28] hover:shadow-xl"
+                        >
+
+                            CONTINUE
+
+                            <svg
+                                class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 12h14M13 6l6 6-6 6"
+                                />
+
+                            </svg>
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+            <!-- SELECTED RESTAURANT -->
+
+            <aside>
+
+                <div
+                    class="sticky top-8 overflow-hidden rounded-[2rem] bg-slate-950 p-6 text-white shadow-[0_30px_80px_-35px_rgba(15,23,42,0.5)] sm:p-7"
+                >
+
+                    <div
+                        class="mb-6 flex items-center justify-between"
+                    >
+
+                        <div>
+
+                            <p
+                                class="font-serif text-2xl italic text-[#ffb400]"
+                            >
+                                Selected Restaurant
+                            </p>
+
+                            <p
+                                class="mt-1 text-[10px] font-black uppercase tracking-[0.25em] text-slate-500"
+                            >
+                                {{ restaurant?.city?.name ? restaurant?.city?.name + ' City' : 'Your Choice' }}
+                            </p>
+
+                        </div>
+
+                        @if (restaurant?.rating) {
+                            <span
+                                class="flex items-center gap-1 rounded-full bg-[#ffb400] px-3 py-1.5 text-xs font-black text-slate-950 shadow-md shadow-[#ffb400]/20"
+                            >
+                                <svg class="h-3.5 w-3.5 fill-slate-950" viewBox="0 0 24 24">
+                                    <path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z" />
+                                </svg>
+                                {{ restaurant?.rating }}
+                            </span>
+                        } @else if (restaurant?.category) {
+                            <span
+                                class="rounded-full bg-[#ffb400] px-3 py-1.5 text-xs font-black text-slate-950"
+                            >
+                                {{ restaurant?.category }}
+                            </span>
+                        }
+
+                    </div>
+
+                    <div class="relative overflow-hidden rounded-2xl">
+
+                        <img
+                            [src]="restaurant?.imageUrl || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=90'"
+                            [alt]="restaurant?.name || 'Selected Restaurant'"
+                            class="h-64 w-full object-cover transition-transform duration-700 hover:scale-105"
+                        />
+
+                        @if (restaurant?.category) {
+                            <span class="absolute bottom-3 left-3 rounded-full bg-slate-950/80 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-[#ffb400] backdrop-blur-md">
+                                {{ restaurant?.category }}
+                            </span>
+                        }
+
+                    </div>
+
+                    <div class="pt-6">
+
+                        <div class="flex items-center gap-2">
+
+                            <span
+                                class="h-2 w-2 rounded-full bg-[#ffb400]"
+                            ></span>
+
+                            <span
+                                class="text-[10px] font-black uppercase tracking-[0.22em] text-[#ffb400]"
+                            >
+                                {{ restaurant?.city?.name ? restaurant?.city?.name + ' Branch' : 'Order From' }}
+                            </span>
+
+                        </div>
+
+                        <h3
+                            class="mt-3 text-3xl font-black tracking-tight uppercase"
+                        >
+                            {{ restaurant?.name || 'Selected Restaurant' }}
+                        </h3>
+
+                        <p
+                            class="mt-3 text-sm leading-7 text-slate-400"
+                        >
+                            {{ restaurant?.description || 'Discover amazing dishes and meals freshly prepared by the restaurant for your order.' }}
+                        </p>
+
+                        <div class="mt-6 flex flex-wrap gap-2">
+
+                            @if (restaurant?.category) {
+                                <span
+                                    class="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-300"
+                                >
+                                    {{ restaurant?.category }}
+                                </span>
+                            }
+
+                            @if (restaurant?.likes) {
+                                <span
+                                    class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-300"
+                                >
+                                    <svg class="h-3 w-3 text-rose-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                    </svg>
+                                    {{ restaurant?.likes }} Likes
+                                </span>
+                            }
+
+                            @if (restaurant?.comments) {
+                                <span
+                                    class="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-300"
+                                >
+                                    <svg class="h-3 w-3 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                    </svg>
+                                    {{ restaurant?.comments }} Reviews
+                                </span>
+                            }
+
+                            @if (restaurant?.menuItemCount) {
+                                <span
+                                    class="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-bold text-slate-300"
+                                >
+                                    🍽 {{ restaurant?.menuItemCount }} Dishes
+                                </span>
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    }
+
+
+    <!-- ================================================= -->
+    <!-- STEP 4 -->
+    <!-- ================================================= -->
+
+    @if (currentStep === 4) {
+
+    <main class="mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
+
+        <!-- HEADER -->
+
+        <div class="mb-10">
+
+            <div
+                class="flex flex-col justify-between gap-6 sm:flex-row sm:items-end"
+            >
+
+                <div>
+
+                    <div class="mb-4 flex items-center gap-3">
+
+                        <span
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-[#ffb400] text-sm font-black text-slate-950"
+                        >
+                            04
+                        </span>
+
+                        <span
+                            class="text-xs font-black uppercase tracking-[0.22em] text-slate-400"
+                        >
+                            Final confirmation
+                        </span>
+
+                    </div>
+
+                    <h1
+                        class="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl"
+                    >
+
+                        Review
+
+                        <span
+                            class="font-serif font-medium italic text-[#e58b00]"
+                        >
+                            your order
+                        </span>
+
+                    </h1>
+
+                    <p
+                        class="mt-3 max-w-xl text-sm leading-7 text-slate-500"
+                    >
+                        Everything looks good? Review your information
+                        and order before confirming your reservation.
+                    </p>
+
+                </div>
+
+                <div
+                    class="rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3"
+                >
+
+                    <div class="flex items-center gap-3">
+
+                        <div
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500 text-white"
+                        >
+
+                            <svg
+                                class="h-4 w-4"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2.5"
+                            >
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 12l4 4L19 6"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="text-xs font-black text-emerald-800"
+                            >
+                                READY TO ORDER
+                            </p>
+
+                            <p
+                                class="text-[11px] text-emerald-600"
+                            >
+                                Your information is complete
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- YOUR DATA -->
+
+        <section
+            class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_70px_-35px_rgba(15,23,42,0.22)]"
+        >
+
+            <div
+                class="border-b border-slate-100 px-6 py-5 sm:px-8"
+            >
+
+                <div
+                    class="flex items-center justify-between"
+                >
+
+                    <div>
+
+                        <p
+                            class="text-[10px] font-black uppercase tracking-[0.25em] text-[#d88a00]"
+                        >
+                            Your data
+                        </p>
+
+                        <h2
+                            class="mt-1 text-lg font-black text-slate-950"
+                        >
+                            Delivery information
+                        </h2>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        (click)="goBackToCustomer()"
+                        class="text-xs font-black text-slate-400 transition-colors hover:text-slate-950"
+                    >
+                        EDIT
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+
+                <!-- NAME -->
+
+                <div
+                    class="border-b border-slate-100 p-6 lg:border-b-0 lg:border-r"
+                >
+
+                    <div
+                        class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#fff4d3] text-[#d98b00]"
+                    >
+
+                        <svg
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        >
+
+                            <circle
+                                cx="12"
+                                cy="8"
+                                r="3.5"
+                            />
+
+                            <path
+                                stroke-linecap="round"
+                                d="M5 20a7 7 0 0114 0"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                    >
+                        Name
+                    </p>
+
+                    <p
+                        class="mt-2 truncate text-sm font-black text-slate-950"
+                    >
+                        {{ customer.name }}
+                    </p>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div
+                    class="border-b border-slate-100 p-6 lg:border-b-0 lg:border-r"
+                >
+
+                    <div
+                        class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#fff4d3] text-[#d98b00]"
+                    >
+
+                        <svg
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        >
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M5 4h3l2 5-2 1.5a14 14 0 005.5 5.5L15 14l5 2v3a2 2 0 01-2 2C10.8 21 3 13.2 3 6a2 2 0 012-2z"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                    >
+                        Phone
+                    </p>
+
+                    <p
+                        class="mt-2 text-sm font-black text-slate-950"
+                    >
+                        {{ customer.phone }}
+                    </p>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div
+                    class="border-b border-slate-100 p-6 lg:border-b-0 lg:border-r"
+                >
+
+                    <div
+                        class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#fff4d3] text-[#d98b00]"
+                    >
+
+                        <svg
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        >
+
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            />
+
+                            <path
+                                stroke-linecap="round"
+                                d="M4 7l8 6 8-6"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                    >
+                        E-mail
+                    </p>
+
+                    <p
+                        class="mt-2 truncate text-sm font-black text-slate-950"
+                    >
+                        {{ customer.email }}
+                    </p>
+
+                </div>
+
+
+                <!-- ADDRESS -->
+
+                <div class="p-6">
+
+                    <div
+                        class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-[#fff4d3] text-[#d98b00]"
+                    >
+
+                        <svg
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                        >
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z"
+                            />
+
+                            <circle
+                                cx="12"
+                                cy="10"
+                                r="2.2"
+                            />
+
+                        </svg>
+
+                    </div>
+
+                    <p
+                        class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                    >
+                        Address
+                    </p>
+
+                    <p
+                        class="mt-2 line-clamp-2 text-sm font-black text-slate-950"
+                    >
+                        {{ customer.address }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ORDER TABLE -->
+
+        <section
+            class="mt-8 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_25px_70px_-35px_rgba(15,23,42,0.22)]"
+        >
+
+            <div
+                class="flex items-center justify-between border-b border-slate-100 px-6 py-5 sm:px-8"
+            >
+
+                <div>
+
+                    <p
+                        class="text-[10px] font-black uppercase tracking-[0.25em] text-[#d88a00]"
+                    >
+                        Your selection
+                    </p>
+
+                    <h2
+                        class="mt-1 text-lg font-black text-slate-950"
+                    >
+                        Order summary
+                    </h2>
+
+                </div>
+
+                <span
+                    class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-black text-slate-500"
+                >
+                    {{ orderItems.length }}
+                    item{{ orderItems.length === 1 ? '' : 's' }}
+                </span>
+
+            </div>
+
+
+            <!-- DESKTOP -->
+
+            <div class="hidden overflow-x-auto md:block">
+
+                <table class="w-full min-w-[760px]">
+
+                    <thead>
+
+                        <tr
+                            class="border-b border-slate-100 bg-slate-50/70"
+                        >
+
+                            <th
+                                class="px-8 py-4 text-left text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                            >
+                                Product
+                            </th>
+
+                            <th
+                                class="px-6 py-4 text-center text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                            >
+                                Price
+                            </th>
+
+                            <th
+                                class="px-6 py-4 text-center text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                            >
+                                Quantity
+                            </th>
+
+                            <th
+                                class="px-6 py-4 text-right text-[10px] font-black uppercase tracking-[0.18em] text-slate-400"
+                            >
+                                Total
+                            </th>
+
+                            <th class="w-16 px-6 py-4"></th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @for (
+                            orderItem of orderItems;
+                            track orderItem.item.id
+                        ) {
+
+                        <tr
+                            class="border-b border-slate-100 last:border-0"
+                        >
+
+                            <td class="px-8 py-5">
+
+                                <div
+                                    class="flex items-center gap-4"
+                                >
+
+                                    <img
+                                        [src]="orderItem.item.image"
+                                        [alt]="orderItem.item.name"
+                                        class="h-16 w-16 rounded-xl object-cover shadow-sm"
+                                    />
+
+                                    <div>
+
+                                        <p
+                                            class="text-sm font-black text-slate-950"
+                                        >
+                                            {{ orderItem.item.name }}
+                                        </p>
+
+                                        <p
+                                            class="mt-1 text-xs text-slate-400"
+                                        >
+                                            Freshly prepared
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+                            <td
+                                class="px-6 py-5 text-center text-sm font-bold text-slate-600"
+                            >
+                                ${{ orderItem.item.price.toFixed(2) }}
+                            </td>
+
+                            <td class="px-6 py-5">
+
+                                <div
+                                    class="mx-auto flex w-fit items-center overflow-hidden rounded-xl border border-slate-200"
+                                >
+
+                                    <button
+                                        type="button"
+                                        (click)="decreaseQuantity(orderItem.item.id)"
+                                        class="flex h-9 w-9 items-center justify-center text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-950"
+                                    >
+                                        −
+                                    </button>
+
+                                    <span
+                                        class="flex h-9 min-w-10 items-center justify-center border-x border-slate-200 text-sm font-black"
+                                    >
+                                        {{ orderItem.quantity }}
+                                    </span>
+
+                                    <button
+                                        type="button"
+                                        (click)="increaseQuantity(orderItem.item.id)"
+                                        class="flex h-9 w-9 items-center justify-center text-slate-500 transition-colors hover:bg-[#fff4d3] hover:text-[#d88a00]"
+                                    >
+                                        +
+                                    </button>
+
+                                </div>
+
+                            </td>
+
+                            <td
+                                class="px-6 py-5 text-right"
+                            >
+
+                                <span
+                                    class="text-sm font-black text-slate-950"
+                                >
+                                    ${{
+                                        (
+                                            orderItem.item.price *
+                                            orderItem.quantity
+                                        ).toFixed(2)
+                                    }}
+                                </span>
+
+                            </td>
+
+                            <td class="px-6 py-5 text-center">
+
+                                <button
+                                    type="button"
+                                    (click)="decreaseQuantity(orderItem.item.id)"
+                                    class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-300 transition-colors hover:bg-red-50 hover:text-red-500"
+                                    aria-label="Remove item"
+                                >
+                                    ×
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div
+                class="divide-y divide-slate-100 md:hidden"
+            >
+
+                @for (
+                    orderItem of orderItems;
+                    track orderItem.item.id
+                ) {
+
+                <div class="p-5">
+
+                    <div class="flex gap-4">
+
+                        <img
+                            [src]="orderItem.item.image"
+                            [alt]="orderItem.item.name"
+                            class="h-20 w-20 rounded-xl object-cover"
+                        />
+
+                        <div class="min-w-0 flex-1">
+
+                            <div
+                                class="flex items-start justify-between gap-3"
+                            >
+
+                                <div>
+
+                                    <p
+                                        class="text-sm font-black text-slate-950"
+                                    >
+                                        {{ orderItem.item.name }}
+                                    </p>
+
+                                    <p
+                                        class="mt-1 text-xs text-slate-400"
+                                    >
+                                        ${{ orderItem.item.price.toFixed(2) }}
+                                    </p>
+
+                                </div>
+
+                                <button
+                                    type="button"
+                                    (click)="decreaseQuantity(orderItem.item.id)"
+                                    class="text-lg text-slate-300 hover:text-red-500"
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+                            <div
+                                class="mt-4 flex items-center justify-between"
+                            >
+
+                                <div
+                                    class="flex items-center overflow-hidden rounded-xl border border-slate-200"
+                                >
+
+                                    <button
+                                        type="button"
+                                        (click)="decreaseQuantity(orderItem.item.id)"
+                                        class="h-9 w-9 text-slate-500 hover:bg-slate-100"
+                                    >
+                                        −
+                                    </button>
+
+                                    <span
+                                        class="flex h-9 min-w-9 items-center justify-center border-x border-slate-200 text-xs font-black"
+                                    >
+                                        {{ orderItem.quantity }}
+                                    </span>
+
+                                    <button
+                                        type="button"
+                                        (click)="increaseQuantity(orderItem.item.id)"
+                                        class="h-9 w-9 text-slate-500 hover:bg-[#fff4d3]"
+                                    >
+                                        +
+                                    </button>
+
+                                </div>
+
+                                <p
+                                    class="text-sm font-black text-slate-950"
+                                >
+                                    ${{
+                                        (
+                                            orderItem.item.price *
+                                            orderItem.quantity
+                                        ).toFixed(2)
+                                    }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                }
+
+            </div>
+
+        </section>
+
+
+        <!-- TOTAL -->
+
+        <section
+            class="mt-8 overflow-hidden rounded-[2rem] bg-slate-950 text-white shadow-[0_30px_80px_-35px_rgba(15,23,42,0.6)]"
+        >
+
+            <div class="grid lg:grid-cols-[1fr_420px]">
+
+                <div class="p-7 sm:p-9">
+
+                    <div class="flex items-start gap-4">
+
+                        <div
+                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#ffb400] text-slate-950"
+                        >
+
+                            <svg
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.8"
+                            >
+
+                                <rect
+                                    x="3"
+                                    y="4"
+                                    width="18"
+                                    height="16"
+                                    rx="2"
+                                />
+
+                                <path
+                                    stroke-linecap="round"
+                                    d="M7 8h10M7 12h3M7 16h6"
+                                />
+
+                            </svg>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="text-[10px] font-black uppercase tracking-[0.25em] text-[#ffb400]"
+                            >
+                                Almost there
+                            </p>
+
+                            <h2
+                                class="mt-2 text-2xl font-black tracking-tight sm:text-3xl"
+                            >
+                                Your order is ready.
+                            </h2>
+
+                            <p
+                                class="mt-3 max-w-xl text-sm leading-7 text-slate-400"
+                            >
+                                Check the total one last time, then confirm
+                                your order. We'll prepare everything fresh
+                                and get it to you as soon as possible.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-8 flex flex-wrap gap-3">
+
+                        <div
+                            class="rounded-xl border border-white/10 bg-white/5 px-4 py-3"
+                        >
+
+                            <p
+                                class="text-[10px] font-bold uppercase tracking-wider text-slate-500"
+                            >
+                                Items
+                            </p>
+
+                            <p class="mt-1 text-sm font-black">
+                                {{ orderItems.length }}
+                            </p>
+
+                        </div>
+
+                        <div
+                            class="rounded-xl border border-white/10 bg-white/5 px-4 py-3"
+                        >
+
+                            <p
+                                class="text-[10px] font-bold uppercase tracking-wider text-slate-500"
+                            >
+                                Delivery
+                            </p>
+
+                            <p
+                                class="mt-1 text-sm font-black text-emerald-400"
+                            >
+                                FREE
+                            </p>
+
+                        </div>
+
+                        <div
+                            class="rounded-xl border border-white/10 bg-white/5 px-4 py-3"
+                        >
+
+                            <p
+                                class="text-[10px] font-bold uppercase tracking-wider text-slate-500"
+                            >
+                                Payment
+                            </p>
+
+                            <p class="mt-1 text-sm font-black">
+                                On delivery
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="border-t border-white/10 bg-white/[0.03] p-7 sm:p-9 lg:border-l lg:border-t-0"
+                >
+
+                    <p
+                        class="text-[10px] font-black uppercase tracking-[0.25em] text-slate-500"
+                    >
+                        Order total
+                    </p>
+
+                    <div class="mt-6 space-y-4">
+
+                        <div
+                            class="flex items-center justify-between text-sm"
+                        >
+
+                            <span class="text-slate-400">
+                                Subtotal
+                            </span>
+
+                            <span class="font-bold">
+                                ${{ subtotal.toFixed(2) }}
+                            </span>
+
+                        </div>
+
+                        <div
+                            class="flex items-center justify-between text-sm"
+                        >
+
+                            <span class="text-slate-400">
+                                Delivery
+                            </span>
+
+                            <span
+                                class="font-bold text-emerald-400"
+                            >
+                                FREE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="my-6 h-px bg-white/10"></div>
+
+                    <div
+                        class="flex items-end justify-between gap-4"
+                    >
+
+                        <div>
+
+                            <p
+                                class="text-xs font-bold text-slate-500"
+                            >
+                                TOTAL
+                            </p>
+
+                            <p
+                                class="mt-1 text-4xl font-black tracking-tight text-[#ffb400]"
+                            >
+                                ${{ grandTotal.toFixed(2) }}
+                            </p>
+
+                        </div>
+
+                        <span
+                            class="mb-1 rounded-full bg-[#ffb400]/10 px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-[#ffb400]"
+                        >
+                            Final
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            @if (orderError) {
+                <div class="mx-5 mb-4 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-xs font-bold text-red-400 sm:mx-6">
+                    {{ orderError }}
+                </div>
+            }
+
+            <div
+                class="flex flex-col-reverse gap-3 border-t border-white/10 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+            >
+
+                <button
+                    type="button"
+                    (click)="goBackToCustomer()"
+                    class="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 px-6 py-3.5 text-sm font-black text-slate-300 transition-all hover:border-white/20 hover:bg-white/5 hover:text-white"
+                >
+
+                    <svg
+                        class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M19 12H5M12 19l-7-7 7-7"
+                        />
+
+                    </svg>
+
+                    BACK
+
+                </button>
+
+                <button
+                    type="button"
+                    (click)="checkout()"
+                    [disabled]="isSubmittingOrder"
+                    class="group inline-flex items-center justify-center gap-3 rounded-xl bg-[#ffb400] px-8 py-4 text-sm font-black text-slate-950 shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-[#ffca28] disabled:cursor-not-allowed disabled:opacity-75"
+                >
+
+                    @if (isSubmittingOrder) {
+                        <span class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent"></span>
+                        SUBMITTING ORDER...
+                    } @else {
+                        CHECKOUT & PLACE ORDER
+
+                        <svg
+                            class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M5 12h14M13 6l6 6-6 6"
+                            />
+
+                        </svg>
+                    }
+
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    }
+
+
+    <!-- ================================================= -->
+    <!-- SUCCESS MODAL - NO MOTION -->
+    <!-- ================================================= -->
+
+    @if (checkoutCompleted) {
+
+    <div
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm"
+    >
+
+        <div
+            class="w-full max-w-md overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_100px_-20px_rgba(15,23,42,0.55)]"
+        >
+
+            <!-- TOP ACCENT -->
+
+            <div class="h-2 bg-[#ffb400]"></div>
+
+
+            <div class="p-7 text-center sm:p-9">
+
+                <!-- ICON -->
+
+                <div
+                    class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-emerald-50 text-emerald-500"
+                >
+
+                    <svg
+                        class="h-10 w-10"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                    >
+
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M5 12l4 4L19 6"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <!-- TEXT -->
+
+                <p
+                    class="mt-7 text-[10px] font-black uppercase tracking-[0.25em] text-emerald-500"
+                >
+                    Order confirmed
+                </p>
+
+                <h2
+                    class="mt-2 text-3xl font-black tracking-tight text-slate-950"
+                >
+                    Order placed successfully!
+                </h2>
+
+                <p
+                    class="mx-auto mt-4 max-w-sm text-sm leading-7 text-slate-500"
+                >
+                    Your order has been saved successfully.
+                    Your food will arrive as soon as possible.
+                </p>
+
+
+                <!-- REFERENCE -->
+
+                <div
+                    class="mx-auto mt-7 flex max-w-xs items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 px-5 py-4"
+                >
+
+                    <div class="text-left">
+
+                        <p
+                            class="text-[10px] font-black uppercase tracking-wider text-slate-400"
+                        >
+                            Order reference
+                        </p>
+
+                        <p
+                            class="mt-1 text-sm font-black text-slate-950"
+                        >
+                            {{ createdOrder ? '#' + createdOrder.id : ('#FG-' + restaurantId + orderItems.length + '24') }}
+                        </p>
+
+                    </div>
+
+                    <div class="text-right">
+
+                        <p
+                            class="text-[10px] font-black uppercase tracking-wider text-slate-400"
+                        >
+                            Total
+                        </p>
+
+                        <p
+                            class="mt-1 text-sm font-black text-[#d88a00]"
+                        >
+                            ${{ (createdOrder ? createdOrder.total : grandTotal).toFixed(2) }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="mt-7">
+
+                    @if (createdOrder) {
+                        <button
+                            type="button"
+                            (click)="viewPlacedOrder()"
+                            class="mb-3 w-full rounded-xl bg-slate-950 px-6 py-4 text-sm font-black text-white shadow-lg transition-all hover:-translate-y-0.5 hover:bg-slate-800"
+                        >
+                            VIEW ORDER DETAILS
+                        </button>
+                    }
+
+                    <button
+                        type="button"
+                        (click)="closeSuccessModal()"
+                        class="w-full rounded-xl bg-[#ffb400] px-6 py-4 text-sm font-black text-slate-950 shadow-lg shadow-[#ffb400]/20 transition-all hover:-translate-y-0.5 hover:bg-[#ffca28] hover:shadow-xl"
+                    >
+                        DONE
+                    </button>
+
+                    <button
+                        type="button"
+                        (click)="goBackToRestaurants()"
+                        class="mt-3 w-full rounded-xl px-6 py-3 text-xs font-black uppercase tracking-wider text-slate-400 transition-colors hover:bg-slate-50 hover:text-slate-900"
+                    >
+                        Back to restaurants
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    }
+
+    <!-- ================================================= -->
+    <!-- STEP 5 - ORDER DETAILS (GET /api/orders/{orderId}) -->
+    <!-- ================================================= -->
+
+    @if (currentStep === 5) {
+
+    <main class="mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
+
+        <div class="mb-10">
+            <div class="mb-4 flex items-center gap-3">
+                <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#ffb400] text-sm font-black text-slate-950">
+                    05
+                </span>
+                <span class="text-xs font-black uppercase tracking-[0.22em] text-slate-400">
+                    Order Details
+                </span>
+            </div>
+
+            <h1 class="text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+                Order <span class="font-serif font-medium italic text-[#e58b00]">#{{ viewedOrder?.id }}</span>
+            </h1>
+
+            <p class="mt-3 max-w-2xl text-sm leading-7 text-slate-500">
+                Track and review the full details of your order.
+            </p>
+        </div>
+
+        @if (isLoadingOrder) {
+            <div class="rounded-[2rem] border border-slate-200 bg-white p-12 text-center shadow-lg">
+                <div class="inline-block h-10 w-10 animate-spin rounded-full border-4 border-[#ffb400] border-t-transparent"></div>
+                <p class="mt-4 text-sm font-black text-slate-700">Loading order details...</p>
+            </div>
+        } @else if (orderLookupError) {
+            <div class="rounded-[2rem] border border-red-200 bg-red-50 p-10 text-center shadow-lg">
+                <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-red-500 shadow">
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.3 3.8 2.7 17a2 2 0 001.7 3h15.2a2 2 0 001.7-3L13.7 3.8a2 2 0 00-3.4 0z" />
+                    </svg>
+                </div>
+                <h3 class="mt-4 text-xl font-black text-slate-900">Order Not Found</h3>
+                <p class="mt-2 text-sm text-slate-500">{{ orderLookupError }}</p>
+                <button type="button" (click)="goBackToRestaurants()" class="mt-6 rounded-xl bg-[#ffb400] px-6 py-3 text-xs font-black uppercase tracking-wider text-slate-950 transition hover:bg-[#ffca28]">
+                    Back to Restaurants
+                </button>
+            </div>
+        } @else if (viewedOrder) {
+            <div class="space-y-8">
+                <!-- RESTAURANT & STATUS BANNER -->
+                <section class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                        <div class="flex items-center gap-4">
+                            @if (viewedOrder.restaurantImageUrl) {
+                                <img [src]="viewedOrder.restaurantImageUrl" [alt]="viewedOrder.restaurantName" class="h-16 w-16 rounded-2xl object-cover shadow-sm" />
+                            }
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-wider text-[#d88a00]">Restaurant</p>
+                                <h2 class="text-2xl font-black text-slate-950">{{ viewedOrder.restaurantName }}</h2>
+                                <p class="mt-1 text-xs text-slate-400">Order placed: {{ viewedOrder.createdAt | date:'medium' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-4 py-2 text-xs font-black text-emerald-700">
+                            <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                            CONFIRMED & PREPARING
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CUSTOMER INFO & DELIVERY -->
+                <section class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
+                    <div class="border-b border-slate-100 px-6 py-5 sm:px-8">
+                        <p class="text-[10px] font-black uppercase tracking-[0.25em] text-[#d88a00]">Delivery Address</p>
+                        <h3 class="mt-1 text-lg font-black text-slate-950">Customer Details</h3>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 lg:grid-cols-4">
+                        <div class="border-b border-slate-100 p-6 lg:border-b-0 lg:border-r">
+                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">Name</p>
+                            <p class="mt-2 text-sm font-black text-slate-950">{{ viewedOrder.customerName }}</p>
+                        </div>
+                        <div class="border-b border-slate-100 p-6 lg:border-b-0 lg:border-r">
+                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">Phone</p>
+                            <p class="mt-2 text-sm font-black text-slate-950">{{ viewedOrder.customerPhone }}</p>
+                        </div>
+                        <div class="border-b border-slate-100 p-6 lg:border-b-0 lg:border-r">
+                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">E-mail</p>
+                            <p class="mt-2 text-sm font-black text-slate-950">{{ viewedOrder.customerEmail }}</p>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">Address</p>
+                            <p class="mt-2 text-sm font-black text-slate-950">{{ viewedOrder.customerAddress }}</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ORDER ITEMS -->
+                <section class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm">
+                    <div class="flex items-center justify-between border-b border-slate-100 px-6 py-5 sm:px-8">
+                        <div>
+                            <p class="text-[10px] font-black uppercase tracking-[0.25em] text-[#d88a00]">Ordered Items</p>
+                            <h3 class="mt-1 text-lg font-black text-slate-950">Items Breakdown</h3>
+                        </div>
+                        <span class="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-black text-slate-500">
+                            {{ viewedOrder.items.length }} item{{ viewedOrder.items.length === 1 ? '' : 's' }}
+                        </span>
+                    </div>
+
+                    <div class="divide-y divide-slate-100">
+                        @for (oi of viewedOrder.items; track oi.id) {
+                            <div class="flex items-center justify-between p-6">
+                                <div class="flex items-center gap-4">
+                                    @if (oi.imageUrl) {
+                                        <img [src]="oi.imageUrl" [alt]="oi.name" class="h-14 w-14 rounded-xl object-cover" />
+                                    }
+                                    <div>
+                                        <p class="text-sm font-black text-slate-950">{{ oi.name }}</p>
+                                        <p class="mt-1 text-xs text-slate-400">${{ oi.unitPrice.toFixed(2) }} × {{ oi.quantity }}</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm font-black text-slate-950">${{ oi.lineTotal.toFixed(2) }}</p>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- TOTALS -->
+                    <div class="border-t border-slate-100 bg-slate-50 p-6 sm:p-8">
+                        <div class="flex flex-col gap-2 sm:ml-auto sm:max-w-xs">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Subtotal</span>
+                                <span class="font-bold text-slate-900">${{ viewedOrder.subtotal.toFixed(2) }}</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-500">Delivery</span>
+                                <span class="font-bold text-emerald-600">FREE</span>
+                            </div>
+                            <div class="my-2 h-px bg-slate-200"></div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm font-black uppercase text-slate-700">Total</span>
+                                <span class="text-2xl font-black text-[#d88a00]">${{ viewedOrder.total.toFixed(2) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ACTIONS -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pt-4">
+                    <button type="button" (click)="goBackToRestaurants()" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-xs font-black uppercase tracking-wider text-slate-600 shadow-sm transition hover:bg-slate-50">
+                        Back to Restaurants
+                    </button>
+                    <a [routerLink]="['/restaurants', viewedOrder.restaurantId]" class="inline-flex items-center gap-2 rounded-xl bg-[#ffb400] px-6 py-3 text-xs font-black uppercase tracking-wider text-slate-950 shadow-md transition hover:bg-[#ffca28]">
+                        Explore Restaurant Menu
+                    </a>
+                </div>
+            </div>
+        }
+
+    </main>
+
+    }
+
+</div>
