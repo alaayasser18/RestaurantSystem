@@ -188,6 +188,8 @@ export class Orders implements OnInit {
       return;
     }
 
+    this.loadCustomerInfo();
+
     this.route.queryParamMap.subscribe((params) => {
       const qOrderId = Number(params.get('orderId'));
       if (qOrderId && qOrderId > 0) {
@@ -195,13 +197,37 @@ export class Orders implements OnInit {
         return;
       }
 
-      const restaurantId = Number(params.get('restaurantId'));
+      let restaurantId = Number(params.get('restaurantId'));
+      if (!restaurantId || isNaN(restaurantId)) {
+        try {
+          const savedActiveId = localStorage.getItem('restaurant_last_active_id');
+          if (savedActiveId) {
+            restaurantId = Number(savedActiveId);
+          }
+        } catch (_) {}
+      }
+
+      if (restaurantId && !isNaN(restaurantId) && restaurantId > 0) {
+        this.restaurantId = restaurantId;
+        try {
+          localStorage.setItem('restaurant_last_active_id', String(this.restaurantId));
+        } catch (_) {}
+      }
+
+      // Check for previously placed order
+      try {
+        const savedOrder =
+          localStorage.getItem(`restaurant_${this.restaurantId}_created_order`) ||
+          localStorage.getItem('last_placed_order');
+        if (savedOrder) {
+          this.createdOrder = JSON.parse(savedOrder);
+          const modalState = localStorage.getItem(`restaurant_${this.restaurantId}_modal_open`);
+          this.checkoutCompleted = modalState === 'true';
+        }
+      } catch (_) {}
+
       const items = params.get('items');
       const step = Number(params.get('step'));
-
-      if (restaurantId) {
-        this.restaurantId = restaurantId;
-      }
 
       if (items) {
         this.selectedItems = items
@@ -220,11 +246,25 @@ export class Orders implements OnInit {
         } catch (_) {}
       }
 
-      this.currentStep = step === 4 ? 4 : 3;
+      // Fallback items if an order exists
+      if (this.selectedItems.length === 0 && this.createdOrder && this.createdOrder.items) {
+        this.selectedItems = this.createdOrder.items.map((i) => i.menuItemId || i.id);
+      }
+
+      if (step === 4 || step === 3) {
+        this.currentStep = step;
+      } else {
+        try {
+          const savedStep = localStorage.getItem('restaurant_orders_step');
+          this.currentStep = savedStep === '4' ? 4 : 3;
+        } catch (_) {
+          this.currentStep = 3;
+        }
+      }
 
       this.buildOrderItems();
 
-      if (this.selectedItems.length === 0) {
+      if (this.selectedItems.length === 0 && !this.createdOrder) {
         this.router.navigate(['/restaurants']);
         return;
       }
@@ -264,34 +304,70 @@ export class Orders implements OnInit {
                 this.restaurant = res.data.restaurant;
               }
               if (res.data.items) {
-              const apiItems = res.data.items.map((m) => ({
-                id: m.id,
-                name: m.name,
-                price: m.price,
-                image: m.imageUrl,
-              }));
-              for (const item of apiItems) {
-                const idx = this.menuItems.findIndex((m) => m.id === item.id);
-                if (idx >= 0) {
-                  this.menuItems[idx] = item;
-                } else {
-                  this.menuItems.push(item);
+                const apiItems = res.data.items.map((m) => ({
+                  id: m.id,
+                  name: m.name,
+                  price: m.price,
+                  image: m.imageUrl,
+                }));
+                for (const item of apiItems) {
+                  const idx = this.menuItems.findIndex((m) => m.id === item.id);
+                  if (idx >= 0) {
+                    this.menuItems[idx] = item;
+                  } else {
+                    this.menuItems.push(item);
+                  }
                 }
+                this.buildOrderItems();
+                this.cdr.markForCheck();
               }
-              this.buildOrderItems();
-              this.cdr.markForCheck();
             }
-          }
-        });
-    }
+          });
+      }
 
       this.cdr.markForCheck();
     });
   }
 
+  saveCustomerInfo(): void {
+    try {
+      localStorage.setItem('restaurant_customer_info', JSON.stringify(this.customer));
+    } catch (_) {}
+  }
+
+  private loadCustomerInfo(): void {
+    try {
+      const saved = localStorage.getItem('restaurant_customer_info');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && typeof parsed === 'object') {
+          if (parsed.name) this.customer.name = parsed.name;
+          if (parsed.phone) this.customer.phone = parsed.phone;
+          if (parsed.email) this.customer.email = parsed.email;
+          if (parsed.address) this.customer.address = parsed.address;
+        }
+      }
+    } catch (_) {}
+  }
+
+  private saveOrderQuantities(): void {
+    try {
+      const quantities: Record<number, number> = {};
+      for (const oi of this.orderItems) {
+        quantities[oi.item.id] = oi.quantity;
+      }
+      localStorage.setItem(
+        `restaurant_${this.restaurantId}_quantities`,
+        JSON.stringify(quantities)
+      );
+    } catch (_) {}
+  }
+
   private buildOrderItems(): void {
     let savedDetails: Record<number, any> = {};
     let savedPrices: Record<number, number> = {};
+    let savedQuantities: Record<number, number> = {};
+
     try {
       const saved = localStorage.getItem(`restaurant_${this.restaurantId}_selected_data`);
       if (saved) {
@@ -301,9 +377,33 @@ export class Orders implements OnInit {
       }
     } catch (_) {}
 
+    try {
+      const qSaved = localStorage.getItem(`restaurant_${this.restaurantId}_quantities`);
+      if (qSaved) {
+        savedQuantities = JSON.parse(qSaved);
+      }
+    } catch (_) {}
+
+    if (this.createdOrder && this.createdOrder.items) {
+      for (const item of this.createdOrder.items) {
+        const itemId = item.menuItemId || item.id;
+        if (!savedDetails[itemId]) {
+          savedDetails[itemId] = {
+            id: itemId,
+            name: item.name,
+            price: item.unitPrice,
+            image: item.imageUrl,
+          };
+        }
+        if (!savedQuantities[itemId]) {
+          savedQuantities[itemId] = item.quantity;
+        }
+      }
+    }
+
     this.orderItems = this.selectedItems.map((id) => {
       const existing = this.orderItems.find((oi) => oi.item.id === id);
-      const quantity = existing ? existing.quantity : 1;
+      const quantity = existing ? existing.quantity : (savedQuantities[id] || 1);
 
       const found = this.menuItems.find((m) => m.id === id);
       if (found) {
@@ -335,6 +435,8 @@ export class Orders implements OnInit {
         quantity,
       };
     });
+
+    this.saveOrderQuantities();
   }
 
   private loadCustomerFromParams(params: ParamMap): void {
@@ -358,6 +460,8 @@ export class Orders implements OnInit {
     if (address) {
       this.customer.address = address;
     }
+
+    this.saveCustomerInfo();
   }
 
   get subtotal(): number {
@@ -384,6 +488,7 @@ export class Orders implements OnInit {
     }
 
     orderItem.quantity += 1;
+    this.saveOrderQuantities();
     this.cdr.markForCheck();
   }
 
@@ -396,6 +501,7 @@ export class Orders implements OnInit {
 
     if (orderItem.quantity > 1) {
       orderItem.quantity -= 1;
+      this.saveOrderQuantities();
       this.cdr.markForCheck();
       return;
     }
@@ -405,8 +511,18 @@ export class Orders implements OnInit {
     );
 
     this.selectedItems = this.selectedItems.filter((id) => id !== itemId);
+    this.saveOrderQuantities();
 
-    if (this.orderItems.length === 0) {
+    try {
+      const saved = localStorage.getItem(`restaurant_${this.restaurantId}_selected_data`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        parsed.items = this.selectedItems;
+        localStorage.setItem(`restaurant_${this.restaurantId}_selected_data`, JSON.stringify(parsed));
+      }
+    } catch (_) {}
+
+    if (this.orderItems.length === 0 && !this.createdOrder) {
       this.router.navigate(['/restaurants', this.restaurantId]);
       return;
     }
@@ -419,6 +535,11 @@ export class Orders implements OnInit {
   }
 
   goBackToCustomer(): void {
+    this.currentStep = 3;
+    try {
+      localStorage.setItem('restaurant_orders_step', '3');
+    } catch (_) {}
+
     this.router.navigate(['/orders'], {
       queryParams: {
         restaurantId: this.restaurantId,
@@ -432,7 +553,19 @@ export class Orders implements OnInit {
   }
 
   goBackToRestaurants(): void {
+    this.checkoutCompleted = false;
+    try {
+      localStorage.setItem(`restaurant_${this.restaurantId}_modal_open`, 'false');
+    } catch (_) {}
     this.router.navigate(['/restaurants']);
+  }
+
+  closeSuccessModal(): void {
+    this.checkoutCompleted = false;
+    try {
+      localStorage.setItem(`restaurant_${this.restaurantId}_modal_open`, 'false');
+    } catch (_) {}
+    this.cdr.markForCheck();
   }
 
   next(form: NgForm): void {
@@ -441,6 +574,11 @@ export class Orders implements OnInit {
     if (form.invalid) {
       return;
     }
+
+    this.saveCustomerInfo();
+    try {
+      localStorage.setItem('restaurant_orders_step', '4');
+    } catch (_) {}
 
     this.router.navigate(['/orders'], {
       queryParams: {
@@ -513,9 +651,12 @@ export class Orders implements OnInit {
           this.checkoutCompleted = true;
 
           try {
-            localStorage.removeItem(
-              `restaurant_${this.restaurantId}_selected_data`
+            localStorage.setItem(
+              `restaurant_${this.restaurantId}_created_order`,
+              JSON.stringify(this.createdOrder)
             );
+            localStorage.setItem('last_placed_order', JSON.stringify(this.createdOrder));
+            localStorage.setItem(`restaurant_${this.restaurantId}_modal_open`, 'true');
           } catch (_) {}
         } else if (response && !response.success) {
           this.orderError = response.message || 'Unable to place order.';
@@ -559,17 +700,66 @@ export class Orders implements OnInit {
       });
   }
 
+  onHeaderBackClick(): void {
+    if (this.currentStep === 5) {
+      this.returnToConfirmation(true);
+      return;
+    }
+    if (this.currentStep === 4) {
+      this.goBackToCustomer();
+      return;
+    }
+    this.goBackToMenu();
+  }
+
+  returnToConfirmation(reopenModal = true): void {
+    this.currentStep = 4;
+    try {
+      localStorage.setItem('restaurant_orders_step', '4');
+    } catch (_) {}
+
+    if (reopenModal && this.createdOrder) {
+      this.checkoutCompleted = true;
+      try {
+        localStorage.setItem(`restaurant_${this.restaurantId}_modal_open`, 'true');
+      } catch (_) {}
+    } else {
+      this.checkoutCompleted = false;
+      try {
+        localStorage.setItem(`restaurant_${this.restaurantId}_modal_open`, 'false');
+      } catch (_) {}
+    }
+
+    this.router.navigate(['/orders'], {
+      queryParams: {
+        restaurantId: this.restaurantId,
+        items: this.selectedItems.join(','),
+        name: this.customer.name,
+        phone: this.customer.phone,
+        email: this.customer.email,
+        address: this.customer.address,
+        step: 4,
+      },
+    });
+    this.cdr.markForCheck();
+  }
+
   viewPlacedOrder(): void {
     if (this.createdOrder) {
       this.checkoutCompleted = false;
+      try {
+        localStorage.setItem(`restaurant_${this.restaurantId}_modal_open`, 'false');
+        localStorage.setItem('restaurant_orders_step', '5');
+      } catch (_) {}
       this.viewedOrder = this.createdOrder;
       this.currentStep = 5;
+      this.router.navigate(['/orders'], {
+        queryParams: {
+          restaurantId: this.restaurantId,
+          orderId: this.createdOrder.id,
+        },
+      });
       this.cdr.markForCheck();
     }
-  }
-
-  closeSuccessModal(): void {
-    this.checkoutCompleted = false;
-    this.router.navigate(['/restaurants']);
   }
 }

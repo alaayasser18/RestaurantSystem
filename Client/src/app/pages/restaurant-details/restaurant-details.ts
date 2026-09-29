@@ -104,9 +104,13 @@ export class RestaurantDetailsComponent
     const initialId = Number(this.route.snapshot.paramMap.get('id'));
     if (initialId && initialId > 0) {
       this.restaurantId = initialId;
+      try {
+        localStorage.setItem('restaurant_last_active_id', String(this.restaurantId));
+      } catch (_) {}
       this.loadSavedSelections();
       this.loadRestaurant();
-      this.loadMenu(1, false);
+      const savedPage = this.getSavedMenuPage(initialId);
+      this.loadMenu(savedPage, false);
     }
 
     this.routeSub = this.route.paramMap.subscribe((params) => {
@@ -122,12 +126,27 @@ export class RestaurantDetailsComponent
 
       if (id !== this.restaurantId) {
         this.restaurantId = id;
+        try {
+          localStorage.setItem('restaurant_last_active_id', String(this.restaurantId));
+        } catch (_) {}
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         this.loadSavedSelections();
         this.loadRestaurant();
-        this.loadMenu(1, false);
+        const savedPage = this.getSavedMenuPage(id);
+        this.loadMenu(savedPage, false);
       }
     });
+  }
+
+  private getSavedMenuPage(id: number): number {
+    try {
+      const saved = localStorage.getItem(`restaurant_${id}_menu_page`);
+      if (saved) {
+        const p = Number(saved);
+        if (p > 0) return p;
+      }
+    } catch (_) {}
+    return 1;
   }
 
   ngAfterViewInit(): void {
@@ -407,6 +426,10 @@ export class RestaurantDetailsComponent
     ) {
       return;
     }
+
+    try {
+      localStorage.setItem(`restaurant_${this.restaurantId}_menu_page`, String(page));
+    } catch (_) {}
 
     this.loadMenu(page, true);
   }

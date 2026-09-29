@@ -73,6 +73,32 @@ export class Restaurants implements OnInit, OnDestroy, AfterViewInit {
     this.loadStats();
     this.setupReactiveSearch();
 
+    const currentParams = this.route.snapshot.queryParams;
+    const hasParams =
+      currentParams['search'] !== undefined ||
+      currentParams['cityId'] !== undefined ||
+      currentParams['page'] !== undefined;
+
+    if (!hasParams) {
+      try {
+        const saved = localStorage.getItem('restaurants_catalog_filters');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && (parsed.search || parsed.cityId || (parsed.page && parsed.page > 1))) {
+            this.router.navigate([], {
+              relativeTo: this.route,
+              queryParams: {
+                search: parsed.search || null,
+                cityId: parsed.cityId || null,
+                page: parsed.page > 1 ? parsed.page : null,
+              },
+              replaceUrl: true,
+            });
+          }
+        }
+      } catch (_) {}
+    }
+
     this.filterChange$.pipe(
       debounceTime(400),
       distinctUntilChanged((prev, curr) => prev.search === curr.search && prev.cityId === curr.cityId),
@@ -101,6 +127,17 @@ export class Restaurants implements OnInit, OnDestroy, AfterViewInit {
           this.restaurantName = params['search'] || '';
           this.selectedCity = params['cityId'] || '';
           this.currentPage = Number(params['page']) || 1;
+
+          try {
+            localStorage.setItem(
+              'restaurants_catalog_filters',
+              JSON.stringify({
+                search: this.restaurantName,
+                cityId: this.selectedCity,
+                page: this.currentPage,
+              })
+            );
+          } catch (_) {}
 
           this.isSearching = !!(this.restaurantName || this.selectedCity);
           this.isLoadingRestaurants = true;

@@ -7,7 +7,7 @@
 
             <button
                 type="button"
-                (click)="goBackToMenu()"
+                (click)="onHeaderBackClick()"
                 class="group flex items-center gap-3"
             >
 
@@ -868,6 +868,47 @@
         </div>
 
 
+        <!-- ORDER CONFIRMED BANNER IF ORDER PLACED -->
+        @if (createdOrder) {
+            <div class="mb-8 overflow-hidden rounded-[2rem] border-2 border-emerald-500 bg-white p-6 shadow-xl sm:p-8">
+                <div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+                    <div class="flex items-start gap-4">
+                        <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-500">
+                            <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12l4 4L19 6" />
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="inline-block rounded-full bg-emerald-100 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-700">Order confirmed</span>
+                            <h2 class="mt-1 text-2xl font-black text-slate-950">Order placed successfully!</h2>
+                            <p class="mt-1 text-sm text-slate-500">Your order has been saved successfully. Your food will arrive as soon as possible.</p>
+                            <div class="mt-3 flex flex-wrap items-center gap-4 text-xs">
+                                <span class="font-bold text-slate-400">Order reference: <strong class="text-slate-950 font-black">#{{ createdOrder.id }}</strong></span>
+                                <span class="text-slate-300">•</span>
+                                <span class="font-bold text-slate-400">Total: <strong class="text-[#d88a00] font-black">${{ createdOrder.total.toFixed(2) }}</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button
+                            type="button"
+                            (click)="viewPlacedOrder()"
+                            class="rounded-xl bg-slate-950 px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-lg transition-all hover:bg-slate-800"
+                        >
+                            VIEW ORDER DETAILS
+                        </button>
+                        <button
+                            type="button"
+                            (click)="goBackToRestaurants()"
+                            class="rounded-xl bg-[#ffb400] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-lg shadow-[#ffb400]/20 transition-all hover:bg-[#ffca28]"
+                        >
+                            Back to restaurants
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
         <!-- YOUR DATA -->
 
         <section
@@ -1658,19 +1699,13 @@
 
                 </button>
 
-                <button
-                    type="button"
-                    (click)="checkout()"
-                    [disabled]="isSubmittingOrder"
-                    class="group inline-flex items-center justify-center gap-3 rounded-xl bg-[#ffb400] px-8 py-4 text-sm font-black text-slate-950 shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-[#ffca28] disabled:cursor-not-allowed disabled:opacity-75"
-                >
-
-                    @if (isSubmittingOrder) {
-                        <span class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent"></span>
-                        SUBMITTING ORDER...
-                    } @else {
-                        CHECKOUT & PLACE ORDER
-
+                @if (createdOrder) {
+                    <button
+                        type="button"
+                        (click)="viewPlacedOrder()"
+                        class="group inline-flex items-center justify-center gap-3 rounded-xl bg-emerald-600 px-8 py-4 text-sm font-black text-white shadow-xl shadow-emerald-900/20 transition-all hover:bg-emerald-700"
+                    >
+                        VIEW ORDER DETAILS (#{{ createdOrder.id }})
                         <svg
                             class="h-4 w-4 transition-transform group-hover:translate-x-1"
                             fill="none"
@@ -1678,17 +1713,46 @@
                             stroke="currentColor"
                             stroke-width="2"
                         >
-
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 d="M5 12h14M13 6l6 6-6 6"
                             />
-
                         </svg>
-                    }
+                    </button>
+                } @else {
+                    <button
+                        type="button"
+                        (click)="checkout()"
+                        [disabled]="isSubmittingOrder"
+                        class="group inline-flex items-center justify-center gap-3 rounded-xl bg-[#ffb400] px-8 py-4 text-sm font-black text-slate-950 shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-[#ffca28] disabled:cursor-not-allowed disabled:opacity-75"
+                    >
 
-                </button>
+                        @if (isSubmittingOrder) {
+                            <span class="inline-block h-4 w-4 animate-spin rounded-full border-2 border-slate-950 border-t-transparent"></span>
+                            SUBMITTING ORDER...
+                        } @else {
+                            CHECKOUT & PLACE ORDER
+
+                            <svg
+                                class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 12h14M13 6l6 6-6 6"
+                                />
+
+                            </svg>
+                        }
+
+                    </button>
+                }
 
             </div>
 
@@ -1856,6 +1920,37 @@
 
     <main class="mx-auto max-w-7xl px-5 py-10 lg:px-8 lg:py-14">
 
+        <!-- TOP NAVIGATION BAR -->
+        <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+            <button
+                type="button"
+                (click)="returnToConfirmation(true)"
+                class="group inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wider text-slate-800 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-950"
+            >
+                <svg class="h-4 w-4 transition-transform group-hover:-translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+                Back to Order Confirmation
+            </button>
+
+            <div class="flex flex-wrap items-center gap-3">
+                <button
+                    type="button"
+                    (click)="returnToConfirmation(false)"
+                    class="rounded-xl bg-[#ffb400] px-5 py-2.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-sm shadow-[#ffb400]/20 transition-all hover:bg-[#ffca28]"
+                >
+                    DONE
+                </button>
+                <button
+                    type="button"
+                    (click)="goBackToRestaurants()"
+                    class="rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-xs font-black uppercase tracking-wider text-slate-500 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-900"
+                >
+                    Back to restaurants
+                </button>
+            </div>
+        </div>
+
         <div class="mb-10">
             <div class="mb-4 flex items-center gap-3">
                 <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#ffb400] text-sm font-black text-slate-950">
@@ -1994,12 +2089,38 @@
 
                 <!-- ACTIONS -->
                 <div class="flex flex-wrap items-center justify-between gap-4 pt-4">
-                    <button type="button" (click)="goBackToRestaurants()" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3 text-xs font-black uppercase tracking-wider text-slate-600 shadow-sm transition hover:bg-slate-50">
-                        Back to Restaurants
-                    </button>
-                    <a [routerLink]="['/restaurants', viewedOrder.restaurantId]" class="inline-flex items-center gap-2 rounded-xl bg-[#ffb400] px-6 py-3 text-xs font-black uppercase tracking-wider text-slate-950 shadow-md transition hover:bg-[#ffca28]">
-                        Explore Restaurant Menu
-                    </a>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button
+                            type="button"
+                            (click)="returnToConfirmation(true)"
+                            class="inline-flex items-center gap-2 rounded-xl bg-slate-950 px-6 py-3.5 text-xs font-black uppercase tracking-wider text-white shadow-lg transition-all hover:bg-slate-800"
+                        >
+                            ← Back to Confirmation
+                        </button>
+                        <button
+                            type="button"
+                            (click)="returnToConfirmation(false)"
+                            class="inline-flex items-center gap-2 rounded-xl bg-[#ffb400] px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-950 shadow-md shadow-[#ffb400]/20 transition-all hover:bg-[#ffca28]"
+                        >
+                            DONE
+                        </button>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button
+                            type="button"
+                            (click)="goBackToRestaurants()"
+                            class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-600 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-900"
+                        >
+                            Back to Restaurants
+                        </button>
+                        <a
+                            [routerLink]="['/restaurants', viewedOrder.restaurantId]"
+                            class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-xs font-black uppercase tracking-wider text-slate-600 shadow-sm transition-all hover:bg-slate-50 hover:text-slate-900"
+                        >
+                            Explore Menu
+                        </a>
+                    </div>
                 </div>
             </div>
         }
